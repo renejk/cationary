@@ -7,11 +7,11 @@ import 'dart:convert';
 class CatService {
   Future<Object> getCats() async {
     try {
-      final url = Uri.parse(URL_BREEDS);
+      final url = Uri.parse(AppConstants.URL_BREEDS);
       final response = await http.get(url, headers: {
-        'x-api-key': API_KEY,
+        'x-api-key': AppConstants.API_KEY,
       });
-      if (response.statusCode == SUCCESS_CODE) {
+      if (response.statusCode == AppConstants.SUCCESS_CODE) {
         return SuccessResponseModel(
           response: catFromJson(response.body),
           code: response.statusCode,
@@ -24,7 +24,32 @@ class CatService {
     } catch (e) {
       return FailureResponseModel(
         errorResponse: e.toString(),
-        code: UKNOW_CODE,
+        code: AppConstants.UKNOW_CODE,
+      );
+    }
+  }
+
+  Future<Object> getImageCat(String id) async {
+    try {
+      final url = Uri.parse('${AppConstants.URL_IMAGES}/$id');
+      final response = await http.get(url, headers: {
+        'x-api-key': AppConstants.API_KEY,
+      });
+      print('response: ${response.body}');
+      if (response.statusCode == AppConstants.SUCCESS_CODE) {
+        return SuccessResponseModel(
+          response: json.decode(response.body),
+          code: response.statusCode,
+        );
+      }
+      return FailureResponseModel(
+        errorResponse: json.decode(response.body),
+        code: response.statusCode,
+      );
+    } catch (e) {
+      return FailureResponseModel(
+        errorResponse: e.toString(),
+        code: AppConstants.UKNOW_CODE,
       );
     }
   }

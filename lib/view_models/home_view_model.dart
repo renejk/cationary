@@ -74,4 +74,14 @@ class HomeViewModel with ChangeNotifier {
     _searchController.clear();
     notifyListeners();
   }
+
+  Future getUrlPrincipalImage(String? id) async {
+    if (id != null) {
+      final response = await CatService().getImageCat(id);
+      if (response is SuccessResponseModel) {
+        return response.response as Map;
+      }
+      return '';
+    }
+  }
 }
