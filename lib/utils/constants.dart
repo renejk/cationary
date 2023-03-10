@@ -13,4 +13,10 @@ class AppConstants {
 
 // uknow codes
   static const UKNOW_CODE = 500;
+
+// HELPERS
+
+// SALTO DE LINEA
+  static const NEW_LINE = 0.02;
+  static const NEW_LINE_2 = 0.04;
 }

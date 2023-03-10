@@ -9,12 +9,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: const [
-          HeaderWidget(title: 'Cationary'),
-          SearchWidget(),
-          BodyWidget()
-        ],
+      body: SafeArea(
+        child: Column(
+          children: const [
+            HeaderWidget(title: 'Cationary'),
+            SearchWidget(),
+            BodyWidget()
+          ],
+        ),
       ),
     );
   }
