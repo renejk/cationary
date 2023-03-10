@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cationary/components/image.dart';
 import 'package:cationary/models/cat_model.dart';
 import 'package:cationary/utils/text_style.dart';
 import 'package:cationary/view_models/home_view_model.dart';
@@ -27,30 +28,13 @@ class CardCatWidget extends StatelessWidget {
                   children: [
                     Text(cat.name!, style: FontStyles.TITLE),
                     const Spacer(),
-                    const Text('More...', style: FontStyles.TITLE),
+                    TextButton(
+                        onPressed: () => homeViewModel.toDetail(cat, context),
+                        child: const Text('More...', style: FontStyles.TITLE)),
                   ],
                 ),
               ),
-              FutureBuilder(
-                  future:
-                      homeViewModel.getUrlPrincipalImage(cat.referenceImageId),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && snapshot.data is Map) {
-                      return SizedBox(
-                        height: 250,
-                        width: 250,
-                        child: CachedNetworkImage(
-                          fit: BoxFit.contain,
-                          imageUrl: snapshot.data['url'].toString(),
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                      );
-                    }
-                    return const CircularProgressIndicator();
-                  }),
+              ImageWidget(cat: cat),
               Expanded(
                 child: Row(
                   children: [

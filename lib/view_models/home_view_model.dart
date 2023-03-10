@@ -3,7 +3,8 @@ import 'dart:collection';
 import 'package:cationary/models/cat_model.dart';
 import 'package:cationary/models/response_model.dart';
 import 'package:cationary/repo/cat_service.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cationary/views/detail_cat.dart';
+import 'package:flutter/material.dart';
 
 class HomeViewModel with ChangeNotifier {
   // variables
@@ -83,5 +84,12 @@ class HomeViewModel with ChangeNotifier {
       }
       return '';
     }
+  }
+
+  toDetail(Cat cat, BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DetailCatScreen(cat: cat)),
+    );
   }
 }

@@ -35,7 +35,6 @@ class CatService {
       final response = await http.get(url, headers: {
         'x-api-key': AppConstants.API_KEY,
       });
-      print('response: ${response.body}');
       if (response.statusCode == AppConstants.SUCCESS_CODE) {
         return SuccessResponseModel(
           response: json.decode(response.body),

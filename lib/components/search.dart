@@ -28,9 +28,11 @@ class SearchWidget extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-              onPressed: () => homeViewModel.clearSearch(),
-              icon: const Icon(Icons.close))
+          homeViewModel.searchController.text.isNotEmpty
+              ? IconButton(
+                  onPressed: () => homeViewModel.clearSearch(),
+                  icon: const Icon(Icons.close))
+              : const SizedBox.shrink(),
         ],
       ),
     );
